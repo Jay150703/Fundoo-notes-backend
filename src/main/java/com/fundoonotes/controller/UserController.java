@@ -1,10 +1,10 @@
 package com.fundoonotes.controller;
 
+import com.fundoonotes.dto.request.LoginRequestDto;
 import com.fundoonotes.dto.request.UserRegisterRequestDto;
+import com.fundoonotes.dto.response.LoginResponseDto;
 import com.fundoonotes.dto.response.UserResponseDto;
 import com.fundoonotes.service.UserService;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +20,15 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserResponseDto> register(
-            @Valid @RequestBody UserRegisterRequestDto requestDto) {
+            @RequestBody UserRegisterRequestDto requestDto) {
 
-        UserResponseDto response = userService.register(requestDto);
+        return ResponseEntity.ok(userService.register(requestDto));
+    }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDto> login(
+            @RequestBody LoginRequestDto requestDto) {
+
+        return ResponseEntity.ok(userService.login(requestDto));
     }
 }
