@@ -31,4 +31,9 @@ public class UserController {
 
         return ResponseEntity.ok(userService.login(requestDto));
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "Protected API working";
+    }
 }
